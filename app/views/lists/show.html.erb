@@ -1,10 +1,15 @@
 <h1><%= @list.name %></h1>
-<%= link_to 'Add a new bookmark', new_list_bookmark_path(@list) %>
+
+<h2>Bookmarks</h2>
+<%= link_to 'Add Bookmark', new_list_bookmark_path(@list) %>
+
 <ul>
-  <% @list.bookmarks.each do |bookmark| %>
+  <% @bookmarks.each do |bookmark| %>
     <li>
       <%= bookmark.movie.title %> - <%= bookmark.comment %>
-      <%= link_to 'Delete', list_bookmark_path(@list, bookmark), method: :delete %>
+      <%= form_with model: [@list, bookmark], method: :delete, local: true do %>
+        <%= submit_tag 'Remove Bookmark', data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </li>
   <% end %>
 </ul>

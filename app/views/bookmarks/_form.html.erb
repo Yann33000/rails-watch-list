@@ -1,5 +1,24 @@
-<%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.input :film_id, collection: Film.all, label_method: :title, value_method: :id, label: "Select a Film" %>
-  <%= f.input :comment %>
-  <%= f.button :submit %>
+<%= simple_form_for [@list, @bookmark] do |form| %>
+  <% if @bookmark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
+      <ul>
+        <% @bookmark.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.input :movie_id, collection: Movie.all, label: "Select Movie", prompt: "Choose a movie" %>
+  </div>
+
+  <div class="field">
+    <%= form.input :comment, label: "Comment" %>
+  </div>
+
+  <div class="actions">
+    <%= form.button :submit %>
+  </div>
 <% end %>
