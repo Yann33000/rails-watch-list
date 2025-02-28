@@ -12,7 +12,7 @@ puts "Creating movies..."
 
 30.times do
   Movie.create(
-    name: Faker::Movie.title,
+    title: Faker::Movie.title,
     overview: Faker::Quote.famous_last_words
     )
   end
